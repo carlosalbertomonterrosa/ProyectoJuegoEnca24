@@ -1,0 +1,72 @@
+:root{
+    /* Colores */
+    --body-fondo:lightblue;
+    --body-fondo1:yellow;
+    --sombra-color:rgba(0,0,0,0.4);
+
+    /* medidas  */
+    --ancho-pagina:80%;
+    --alto-presentacion:400px;
+    --border-radius:3em;
+    
+    /*  configuracion sombra */
+    --configuracion-sombra:0 0 0.5em 0.2em;
+}
+
+body{
+    background:var(--body-fondo);
+}
+button.iniciar{
+    border-radius:1em;
+    box-shadow:0.1em 0.1em 0.3em rgba(0,0,0,0.6);
+    cursor:pointer;
+    left:30%;
+    font-family:arial;
+    font-size:50px;
+    font-style:italic;
+    padding:1em;
+    position:absolute;
+    top:25%;
+    width:40%;
+}
+#juego{
+    display:none;
+}
+#tiempo{
+    font-size:200px;
+    position:fixed;
+    right:10px;
+    top:25%;
+    z-index:2;
+}
+.gameover{
+    background:rgba(0,0,0,0.8);
+    display:none;
+    height:100%;
+    left:0;
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:3;
+}
+.mensajeover{
+    display:none;
+    position:fixed;
+    z-index:4;
+}
+.presentacion{
+    background:linear-gradient(darkblue,lightblue);
+    /* Sombra: x y difumunidad grosos color */
+    box-shadow:var(--configuracion-sombra) var(--sombra-color);
+    border-radius:var(--border-radius);
+    font-size:40px;
+    display:none;
+    height:var(--alto-presentacion);
+    /* margin: arriba derecha abajo izquierda */
+    margin:2em auto 0 auto;
+    padding:3em;
+    text-align:center;
+    width:var(--ancho-pagina);
+
+
+}
