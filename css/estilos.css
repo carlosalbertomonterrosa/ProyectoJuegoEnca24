@@ -3,7 +3,6 @@
     --body-fondo:lightblue;
     --body-fondo1:yellow;
     --sombra-color:rgba(0,0,0,0.4);
-
     /* medidas  */
     --ancho-pagina:80%;
     --alto-presentacion:400px;
@@ -13,9 +12,50 @@
     --configuracion-sombra:0 0 0.5em 0.2em;
 }
 
+/* Desde aquí inicié el "up grade" por Carlos Monterrosa */
 body{
-    background:var(--body-fondo);
+    /* Degradado de azul suave (#a8d8ea) a azul fuerte (#0a2a6e) en diagonal */
+    background: linear-gradient(135deg, #a8d8ea 0%, #4a90d9 40%, #1a4fa8 70%, #0a2a6e 100%);
+    min-height: 100vh;
 }
+
+/* Estilos para el bloque de bienvenida con nombre y mensaje del tigre */
+#bienvenida {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(200,230,255,0.95));
+    border-radius: 1.5em;
+    box-shadow: 0 0 2em 0.5em rgba(0, 60, 180, 0.4);
+    padding: 2em 3em;
+    text-align: center;
+    z-index: 10;
+    font-family: 'Georgia', serif;
+    animation: aparecer 0.5s ease;
+}
+
+#textoBienvenida {
+    font-size: 2em;
+    font-weight: bold;
+    color: #0a2a6e;
+    margin-bottom: 0.5em;
+}
+
+.mensaje-tigre {
+    font-size: 1.4em;
+    color: #c0392b;
+    font-style: italic;
+    font-weight: bold;
+}
+
+/* Animación de aparición del mensaje de bienvenida */
+@keyframes aparecer {
+    from { opacity: 0; transform: translate(-50%, -60%) scale(0.8); }
+    to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+/* Finaliza aquí */
+
 button.iniciar{
     border-radius:1em;
     box-shadow:0.1em 0.1em 0.3em rgba(0,0,0,0.6);
@@ -67,6 +107,4 @@ button.iniciar{
     padding:3em;
     text-align:center;
     width:var(--ancho-pagina);
-
-
 }
