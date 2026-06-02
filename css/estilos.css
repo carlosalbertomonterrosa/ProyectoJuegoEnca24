@@ -12,10 +12,21 @@
 }
 
 /* EDITADO POR CARLOS MONETTROSA
-   Fondo del body cambiado a degradado oscuro en vez de color plano */
+   Fondo degradado oscuro, contenido centrado como celular */
 body {
     background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
     min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* EDITADO POR CARLOS MONETTROSA
+   Contenedor principal simulando pantalla de celular centrada */
+.contenido {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
 }
 
 /* Código original del equipo — botón iniciar */
@@ -23,23 +34,27 @@ button.iniciar {
     border-radius: 1em;
     box-shadow: 0.1em 0.1em 0.3em rgba(0,0,0,0.6);
     cursor: pointer;
-    left: 30%;
     font-family: arial;
-    font-size: 50px;
+    font-size: 30px;
     font-style: italic;
-    padding: 1em;
-    position: absolute;
-    top: 25%;
-    width: 40%;
-    /* EDITADO POR CARLOS MONETTROSA: fondo degradado dorado al botón iniciar */
+    padding: 0.8em 1.5em;
+    /* EDITADO POR CARLOS MONETTROSA: centrado fijo en pantalla */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+    max-width: 90vw;
+    /* EDITADO POR CARLOS MONETTROSA: degradado dorado */
     background: linear-gradient(90deg, #f7971e, #ffd200);
     border: none;
     transition: transform 0.15s;
+    z-index: 1;
 }
 
-/* EDITADO POR CARLOS MONETTROSA: efecto hover al botón iniciar */
+/* EDITADO POR CARLOS MONETTROSA */
 button.iniciar:hover {
-    transform: scale(1.04);
+    transform: translate(-50%, -50%) scale(1.04);
 }
 
 /* Código original del equipo */
@@ -49,11 +64,13 @@ button.iniciar:hover {
 
 /* Código original del equipo */
 #tiempo {
-    font-size: 200px;
+    font-size: 120px;
     position: fixed;
     right: 10px;
-    top: 25%;
+    top: 10%;
     z-index: 2;
+    /* EDITADO POR CARLOS MONETTROSA: color blanco por defecto */
+    color: white;
 }
 
 /* Código original del equipo */
@@ -76,104 +93,173 @@ button.iniciar:hover {
 }
 
 /* EDITADO POR CARLOS MONETTROSA
-   Fondo de la presentación cambiado a degradado más vistoso */
+   Presentación con degradado oscuro azulado */
 .presentacion {
     background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
     box-shadow: var(--configuracion-sombra) var(--sombra-color);
     border-radius: var(--border-radius);
-    font-size: 40px;
+    font-size: 28px;
     color: white;
     display: none;
-    height: var(--alto-presentacion);
-    margin: 2em auto 0 auto;
-    padding: 3em;
+    height: auto;
+    margin: 0 auto;
+    padding: 2em 1.5em;
     text-align: center;
-    width: var(--ancho-pagina);
+    width: 100%;
+}
+
+/* EDITADO POR CARLOS MONETTROSA: input del nombre */
+.presentacion input {
+    width: 80%;
+    padding: 0.4em 0.8em;
+    border-radius: 0.8em;
+    border: 2px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1);
+    color: white;
+    font-size: 22px;
+    text-align: center;
+    margin: 0.5em 0;
+}
+
+/* EDITADO POR CARLOS MONETTROSA: botón empezar */
+.presentacion button {
+    background: linear-gradient(90deg, #0070f3, #00c6ff);
+    border: none;
+    border-radius: 2em;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0.6em 2em;
+    margin-top: 0.8em;
+    transition: transform 0.15s;
+}
+.presentacion button:hover {
+    transform: scale(1.05);
 }
 
 /* ============================================
    EDITADO POR CARLOS MONETTROSA
-   Responsividad — el juego se adapta a celular,
-   tablet y desktop sin romper el código original
+   Fuente estilo tiza para la pizarra
    ============================================ */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
 
-/* Tablet: pantallas hasta 768px */
+/* EDITADO POR CARLOS MONETTROSA
+   Sección del juego — pizarra verde con tiza */
+#juego {
+    background: linear-gradient(135deg, #1a4a1a 0%, #2d6a2d 50%, #1a4a1a 100%);
+    border: 6px solid #4a7c4a;
+    border-radius: 1em;
+    box-shadow:
+        inset 0 0 80px rgba(0,0,0,0.5),
+        0 0 30px rgba(0,0,0,0.6);
+    margin: 0 auto;
+    padding: 2em 1.5em;
+    text-align: center;
+    width: 100%;
+    color: rgba(255,255,255,0.92);
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+    letter-spacing: 1px;
+}
+
+/* EDITADO POR CARLOS MONETTROSA
+   Inputs de los números estilo tiza */
+#numero1, #numero2 {
+    background: transparent;
+    border: none;
+    border-bottom: 3px dashed rgba(255,255,255,0.6);
+    color: white;
+    font-family: 'Caveat', cursive;
+    font-size: 52px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-align: center;
+    text-shadow:
+        0 0 10px rgba(255,255,255,0.5),
+        1px 1px 3px rgba(0,0,0,0.5);
+    width: 110px;
+    margin: 0 0.2em;
+}
+
+/* EDITADO POR CARLOS MONETTROSA
+   Input de respuesta del jugador */
+#respuestausuario {
+    background: rgba(255,255,255,0.08);
+    border: 2px dashed rgba(255,255,255,0.5);
+    border-radius: 0.5em;
+    color: white;
+    font-family: 'Caveat', cursive;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0.5em 0;
+    padding: 0.2em 0.5em;
+    text-align: center;
+    text-shadow: 0 0 8px rgba(255,255,255,0.4);
+    width: 80%;
+}
+
+/* EDITADO POR CARLOS MONETTROSA
+   Botón responder estilo pizarra */
+#responder {
+    background: linear-gradient(90deg, #388e3c, #66bb6a);
+    border: none;
+    border-radius: 2em;
+    color: white;
+    cursor: pointer;
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 0.8em;
+    padding: 0.5em 2em;
+    transition: transform 0.15s;
+    width: 80%;
+}
+#responder:hover {
+    transform: scale(1.05);
+}
+
+/* ============================================
+   EDITADO POR CARLOS MONETTROSA
+   Responsividad
+   ============================================ */
 @media (max-width: 768px) {
     button.iniciar {
-        font-size: 30px;
-        left: 10%;
-        width: 80%;
-        top: 20%;
-        padding: 0.8em;
+        font-size: 22px;
+        width: 90vw;
     }
-
-    .presentacion {
-        width: 90%;
-        font-size: 24px;
-        height: auto;
-        padding: 2em 1.5em;
-        margin-top: 1em;
-    }
-
     #tiempo {
-        font-size: 100px;
+        font-size: 80px;
         right: 5px;
-        top: 10%;
     }
-
-    #juego {
-        font-size: 20px;
-        padding: 1em;
-    }
-
-    #juego input {
-        width: 100%;
-        font-size: 20px;
-        padding: 0.5em;
+    .presentacion {
+        font-size: 22px;
     }
 }
 
-/* Celular: pantallas hasta 480px */
 @media (max-width: 480px) {
     button.iniciar {
-        font-size: 22px;
-        left: 5%;
-        width: 90%;
-        top: 15%;
-        padding: 0.7em;
+        font-size: 18px;
+        width: 95vw;
     }
-
+    #tiempo {
+        font-size: 60px;
+    }
+    #numero1, #numero2 {
+        font-size: 36px;
+        width: 80px;
+    }
     .presentacion {
-        width: 95%;
         font-size: 18px;
         padding: 1.5em 1em;
-    }
-
-    #tiempo {
-        font-size: 70px;
-        right: 5px;
-        top: 5%;
-    }
-
-    #juego {
-        font-size: 16px;
-    }
-
-    #juego input, #juego button {
-        width: 100%;
-        margin-bottom: 0.5em;
-        font-size: 18px;
     }
 }
 /* FIN EDITADO POR CARLOS MONETTROSA — Responsividad */
 
 /* ============================================
    EDITADO POR CARLOS MONETTROSA
-   Estilos de los modales: bienvenida, resultado
-   final con niveles y mensaje del tigre Cepeda
+   Modales: bienvenida, resultado y tigre cepeda
    ============================================ */
-
-/* Fondo oscuro semitransparente que cubre toda la pantalla */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -181,19 +267,18 @@ button.iniciar:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 20, 0.85);
+    background: rgba(0,0,20,0.85);
     z-index: 100;
 }
 
-/* Caja del modal con degradado oscuro azulado */
 .modal-caja {
     background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-    border: 2px solid rgba(100, 200, 255, 0.4);
+    border: 2px solid rgba(100,200,255,0.4);
     border-radius: 1.5em;
-    box-shadow: 0 0 40px rgba(0, 150, 255, 0.3);
+    box-shadow: 0 0 40px rgba(0,150,255,0.3);
     color: white;
     left: 50%;
-    max-width: 500px;
+    max-width: 420px;
     padding: 3em 2.5em;
     position: fixed;
     text-align: center;
@@ -202,23 +287,20 @@ button.iniciar:hover {
     width: 90%;
 }
 
-/* Emoji grande arriba del modal con animación de rebote */
 .modal-emoji {
     font-size: 70px;
     margin-bottom: 0.3em;
     animation: bounce 1s infinite alternate;
 }
 
-/* Título del modal en azul claro */
 .modal-caja h2 {
     font-family: Arial, sans-serif;
     font-size: 2em;
     margin-bottom: 0.3em;
     color: #7ecfff;
-    text-shadow: 0 0 10px rgba(126, 207, 255, 0.6);
+    text-shadow: 0 0 10px rgba(126,207,255,0.6);
 }
 
-/* Subtítulo del modal */
 .modal-sub {
     color: rgba(255,255,255,0.7);
     font-family: Arial, sans-serif;
@@ -226,7 +308,6 @@ button.iniciar:hover {
     margin-bottom: 1.5em;
 }
 
-/* Botón principal de los modales con degradado azul */
 .modal-caja button {
     background: linear-gradient(90deg, #0070f3, #00c6ff);
     border: none;
@@ -239,26 +320,24 @@ button.iniciar:hover {
     padding: 0.7em 2.5em;
     margin: 0.3em;
     transition: transform 0.15s, box-shadow 0.15s;
-    box-shadow: 0 4px 15px rgba(0, 112, 243, 0.5);
+    box-shadow: 0 4px 15px rgba(0,112,243,0.5);
 }
 .modal-caja button:hover {
     transform: scale(1.06);
-    box-shadow: 0 6px 20px rgba(0, 198, 255, 0.6);
+    box-shadow: 0 6px 20px rgba(0,198,255,0.6);
 }
 .modal-caja button:active {
     transform: scale(0.97);
 }
 
-/* Botón salir con degradado rojo */
 .btn-salir {
     background: linear-gradient(90deg, #c0392b, #e74c3c) !important;
-    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.5) !important;
+    box-shadow: 0 4px 15px rgba(231,76,60,0.5) !important;
 }
 .btn-salir:hover {
-    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.7) !important;
+    box-shadow: 0 6px 20px rgba(231,76,60,0.7) !important;
 }
 
-/* Contenedor de botones del resultado final */
 .resultado-botones {
     display: flex;
     gap: 1em;
@@ -267,14 +346,12 @@ button.iniciar:hover {
     flex-wrap: wrap;
 }
 
-/* Emoji del resultado con animación de rebote */
 .resultado-emoji {
     font-size: 80px;
     margin-bottom: 0.2em;
     animation: bounce 0.8s infinite alternate;
 }
 
-/* Nivel mostrado en resultado */
 .resultado-nivel {
     color: #a8e6cf;
     font-family: Arial, sans-serif;
@@ -282,7 +359,6 @@ button.iniciar:hover {
     margin-bottom: 0.5em;
 }
 
-/* Puntaje en resultado con fondo semitransparente */
 .resultado-puntaje {
     background: rgba(255,255,255,0.1);
     border-radius: 1em;
@@ -295,16 +371,13 @@ button.iniciar:hover {
     padding: 0.4em 1.5em;
 }
 
-/* Texto del Tigre Cepeda en rojo */
 .tigre-texto {
     color: #ff6b6b !important;
-    text-shadow: 0 0 10px rgba(255, 107, 107, 0.6) !important;
+    text-shadow: 0 0 10px rgba(255,107,107,0.6) !important;
 }
 
-/* Animación de rebote para los emojis de los modales */
 @keyframes bounce {
     from { transform: translateY(0px); }
     to   { transform: translateY(-12px); }
 }
-
 /* FIN EDITADO POR CARLOS MONETTROSA */

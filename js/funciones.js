@@ -40,6 +40,19 @@ function generarNumeros() {
 // FIN EDITADO POR CARLOS MONETTROSA
 
 // ============================================
+// EDITADO POR CARLOS MONETTROSA
+// Permite iniciar el juego con Enter o barra espaciadora
+// desde el input del nombre, simula click en empezar
+// ============================================
+$("#nombre").on("keypress", function(event) {
+    if (event.which == 13 || event.which == 32) {
+        event.preventDefault();
+        $("#empezar").click();
+    }
+});
+// FIN EDITADO POR CARLOS MONETTROSA
+
+// ============================================
 // CÓDIGO ORIGINAL DEL EQUIPO
 // Click en "Empezar Juego" — arranca el temporizador
 // ============================================
@@ -47,13 +60,23 @@ $("#empezar").on("click", function() {
     elementoSonidoBoton.play();
 
     // EDITADO POR CARLOS MONETTROSA
-    // Lee el nombre y abre el modal de bienvenida antes de mostrar el juego
+    // Lee el nombre y abre el modal de bienvenida
     var nombre = $('#nombre').val().trim() || 'Jugador';
     mostrarBienvenida(nombre);
     // FIN EDITADO POR CARLOS MONETTROSA
 
     $(".presentacion").slideUp("fast");
     $("#juego").slideDown("fast");
+
+    // EDITADO POR CARLOS MONETTROSA
+    // Reinicia variables para que el contador llegue
+    // bien a cero en cada partida nueva
+    tiempo = 20;
+    contesto = 0;
+    window.respuestasCorrectas = 0;
+    $("#tiempo").css("color", "white");
+    // FIN EDITADO POR CARLOS MONETTROSA
+
     $("#tiempo").html(tiempo);
 
     // Código original del equipo — temporizador
@@ -66,7 +89,8 @@ $("#empezar").on("click", function() {
         }
         if (tiempo < 5) {
             $("#tiempo").css("color", "red");
-            $("body").css("background", "linear-gradient(135deg,#3d0000,#7f0000)"); // EDITADO POR CARLOS MONETTROSA: fondo degradado en peligro
+            // EDITADO POR CARLOS MONETTROSA: fondo degradado rojo en peligro
+            $("body").css("background", "linear-gradient(135deg,#3d0000,#7f0000)");
         }
         if (tiempo == 0) {
             clearInterval(intervalo);
@@ -75,11 +99,11 @@ $("#empezar").on("click", function() {
             elementoSonidoTimeOut.volume = 0.3;
 
             // EDITADO POR CARLOS MONETTROSA
-            // En vez del gameover original, muestra el modal de resultado con niveles
+            // Muestra modal de resultado con niveles al llegar a cero
             mostrarResultadoFinal(window.respuestasCorrectas);
             // FIN EDITADO POR CARLOS MONETTROSA
 
-            // Código original del equipo — mantiene el gameover por si otro compañero lo necesita
+            // Código original del equipo — mantiene gameover por si otro compañero lo usa
             if (contesto == 0) {
                 $(".gameover, .mensajeover").fadeIn("fast");
             }
@@ -132,11 +156,11 @@ function evaluar() {
         elementoSonidoPerdida.play();
         elementoSonidoPerdida.volume = 0.3;
 
-        // EDITADO POR CARLOS MONETTROSA: también genera nuevos números si falla
+        // EDITADO POR CARLOS MONETTROSA: genera nuevos números si falla
         generarNumeros();
     }
 
-    // EDITADO POR CARLOS MONETTROSA: limpia el campo de respuesta después de cada intento
+    // EDITADO POR CARLOS MONETTROSA: limpia el campo después de cada intento
     $("#respuestausuario").val("");
 }
 // FIN EDITADO POR CARLOS MONETTROSA

@@ -3,11 +3,14 @@
 <head>
     <link rel="stylesheet" href="css/estilos.css">
     <meta charset="UTF-8">
-    <!-- EDITADO POR CARLOS MONETTROSA: viewport actualizado para responsividad móvil -->
+    <!-- EDITADO POR CARLOS MONETTROSA: viewport para responsividad móvil -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- EDITADO POR CARLOS MONETTROSA: fuente estilo tiza para la pizarra -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
     <title>Juego</title>
 </head>
 <body>
+
     <!-- Código original del equipo — NO modificado -->
     <div class="gameover"></div>
     <div class="mensajeover">
@@ -29,7 +32,7 @@
     <!-- FIN EDITADO POR CARLOS MONETTROSA: Modal bienvenida -->
 
     <!-- EDITADO POR CARLOS MONETTROSA: Modal resultado final con niveles -->
-    <!-- Se muestra cuando el tiempo llega a 0, reemplaza el gameover original -->
+    <!-- Se muestra cuando el tiempo llega a 0 -->
     <div id="modal-resultado" class="modal-overlay">
         <div class="modal-caja">
             <div class="resultado-emoji" id="resultado-emoji">🏆</div>
@@ -76,6 +79,7 @@
 
     <!-- Código original del equipo — estructura del juego NO modificada -->
     <button class="iniciar">👌Iniciar Juego</button>
+
     <section class="contenido">
         <article class="presentacion">
             Nombre
@@ -101,7 +105,6 @@
     <script src="js/funciones.js"></script>
 
     <!-- EDITADO POR CARLOS MONETTROSA: Script de modales, bienvenida y niveles -->
-    <!-- Este bloque maneja toda la lógica visual de los modales que agregué -->
     <script>
         // EDITADO POR CARLOS MONETTROSA
         // Contador global de respuestas correctas, lo usa funciones.js también
@@ -115,7 +118,7 @@
         };
 
         // EDITADO POR CARLOS MONETTROSA
-        // Cierra el modal de bienvenida (el juego ya arrancó antes de abrir el modal)
+        // Cierra el modal de bienvenida
         $('#modal-cerrar').on('click', function() {
             $('#modal-bienvenida').fadeOut(200);
         });
@@ -145,15 +148,16 @@
             $('#resultado-emoji').text(emoji);
             $('#resultado-titulo').text(titulo);
             $('#resultado-nivel').text(nivel);
-            $('#resultado-puntaje').text('Respuestas correctas: ' + correctas + ' / 5');
+            $('#resultado-puntaje').text('Respuestas correctas: ' + correctas);
             $('#modal-resultado').fadeIn(300);
         };
 
         // EDITADO POR CARLOS MONETTROSA
-        // Botón "Volver a jugar": cierra modal, resetea contador y muestra el inicio
+        // Botón "Volver a jugar": cierra modal y muestra el botón iniciar
         $('#btn-volver-jugar').on('click', function() {
             $('#modal-resultado').fadeOut(200);
-            window.respuestasCorrectas = 0;
+            // EDITADO POR CARLOS MONETTROSA: restaura fondo original
+            $('body').css('background', 'linear-gradient(135deg, #0f0c29, #302b63, #24243e)');
             $('.iniciar').fadeIn(200);
         });
 
