@@ -1,72 +1,310 @@
-:root{
-    /* Colores */
-    --body-fondo:lightblue;
-    --body-fondo1:yellow;
-    --sombra-color:rgba(0,0,0,0.4);
-
-    /* medidas  */
-    --ancho-pagina:80%;
-    --alto-presentacion:400px;
-    --border-radius:3em;
-    
-    /*  configuracion sombra */
-    --configuracion-sombra:0 0 0.5em 0.2em;
+/* ============================================
+   CÓDIGO ORIGINAL DEL EQUIPO — NO MODIFICADO
+   ============================================ */
+:root {
+    --body-fondo: lightblue;
+    --body-fondo1: yellow;
+    --sombra-color: rgba(0,0,0,0.4);
+    --ancho-pagina: 80%;
+    --alto-presentacion: 400px;
+    --border-radius: 3em;
+    --configuracion-sombra: 0 0 0.5em 0.2em;
 }
 
-body{
-    background:var(--body-fondo);
+/* EDITADO POR CARLOS MONETTROSA
+   Fondo del body cambiado a degradado oscuro en vez de color plano */
+body {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    min-height: 100vh;
 }
-button.iniciar{
-    border-radius:1em;
-    box-shadow:0.1em 0.1em 0.3em rgba(0,0,0,0.6);
-    cursor:pointer;
-    left:30%;
-    font-family:arial;
-    font-size:50px;
-    font-style:italic;
-    padding:1em;
-    position:absolute;
-    top:25%;
-    width:40%;
-}
-#juego{
-    display:none;
-}
-#tiempo{
-    font-size:200px;
-    position:fixed;
-    right:10px;
-    top:25%;
-    z-index:2;
-}
-.gameover{
-    background:rgba(0,0,0,0.8);
-    display:none;
-    height:100%;
-    left:0;
-    position:fixed;
-    top:0;
-    width:100%;
-    z-index:3;
-}
-.mensajeover{
-    display:none;
-    position:fixed;
-    z-index:4;
-}
-.presentacion{
-    background:linear-gradient(darkblue,lightblue);
-    /* Sombra: x y difumunidad grosos color */
-    box-shadow:var(--configuracion-sombra) var(--sombra-color);
-    border-radius:var(--border-radius);
-    font-size:40px;
-    display:none;
-    height:var(--alto-presentacion);
-    /* margin: arriba derecha abajo izquierda */
-    margin:2em auto 0 auto;
-    padding:3em;
-    text-align:center;
-    width:var(--ancho-pagina);
 
-
+/* Código original del equipo — botón iniciar */
+button.iniciar {
+    border-radius: 1em;
+    box-shadow: 0.1em 0.1em 0.3em rgba(0,0,0,0.6);
+    cursor: pointer;
+    left: 30%;
+    font-family: arial;
+    font-size: 50px;
+    font-style: italic;
+    padding: 1em;
+    position: absolute;
+    top: 25%;
+    width: 40%;
+    /* EDITADO POR CARLOS MONETTROSA: fondo degradado dorado al botón iniciar */
+    background: linear-gradient(90deg, #f7971e, #ffd200);
+    border: none;
+    transition: transform 0.15s;
 }
+
+/* EDITADO POR CARLOS MONETTROSA: efecto hover al botón iniciar */
+button.iniciar:hover {
+    transform: scale(1.04);
+}
+
+/* Código original del equipo */
+#juego {
+    display: none;
+}
+
+/* Código original del equipo */
+#tiempo {
+    font-size: 200px;
+    position: fixed;
+    right: 10px;
+    top: 25%;
+    z-index: 2;
+}
+
+/* Código original del equipo */
+.gameover {
+    background: rgba(0,0,0,0.8);
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+}
+
+/* Código original del equipo */
+.mensajeover {
+    display: none;
+    position: fixed;
+    z-index: 4;
+}
+
+/* EDITADO POR CARLOS MONETTROSA
+   Fondo de la presentación cambiado a degradado más vistoso */
+.presentacion {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    box-shadow: var(--configuracion-sombra) var(--sombra-color);
+    border-radius: var(--border-radius);
+    font-size: 40px;
+    color: white;
+    display: none;
+    height: var(--alto-presentacion);
+    margin: 2em auto 0 auto;
+    padding: 3em;
+    text-align: center;
+    width: var(--ancho-pagina);
+}
+
+/* ============================================
+   EDITADO POR CARLOS MONETTROSA
+   Responsividad — el juego se adapta a celular,
+   tablet y desktop sin romper el código original
+   ============================================ */
+
+/* Tablet: pantallas hasta 768px */
+@media (max-width: 768px) {
+    button.iniciar {
+        font-size: 30px;
+        left: 10%;
+        width: 80%;
+        top: 20%;
+        padding: 0.8em;
+    }
+
+    .presentacion {
+        width: 90%;
+        font-size: 24px;
+        height: auto;
+        padding: 2em 1.5em;
+        margin-top: 1em;
+    }
+
+    #tiempo {
+        font-size: 100px;
+        right: 5px;
+        top: 10%;
+    }
+
+    #juego {
+        font-size: 20px;
+        padding: 1em;
+    }
+
+    #juego input {
+        width: 100%;
+        font-size: 20px;
+        padding: 0.5em;
+    }
+}
+
+/* Celular: pantallas hasta 480px */
+@media (max-width: 480px) {
+    button.iniciar {
+        font-size: 22px;
+        left: 5%;
+        width: 90%;
+        top: 15%;
+        padding: 0.7em;
+    }
+
+    .presentacion {
+        width: 95%;
+        font-size: 18px;
+        padding: 1.5em 1em;
+    }
+
+    #tiempo {
+        font-size: 70px;
+        right: 5px;
+        top: 5%;
+    }
+
+    #juego {
+        font-size: 16px;
+    }
+
+    #juego input, #juego button {
+        width: 100%;
+        margin-bottom: 0.5em;
+        font-size: 18px;
+    }
+}
+/* FIN EDITADO POR CARLOS MONETTROSA — Responsividad */
+
+/* ============================================
+   EDITADO POR CARLOS MONETTROSA
+   Estilos de los modales: bienvenida, resultado
+   final con niveles y mensaje del tigre Cepeda
+   ============================================ */
+
+/* Fondo oscuro semitransparente que cubre toda la pantalla */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 20, 0.85);
+    z-index: 100;
+}
+
+/* Caja del modal con degradado oscuro azulado */
+.modal-caja {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    border: 2px solid rgba(100, 200, 255, 0.4);
+    border-radius: 1.5em;
+    box-shadow: 0 0 40px rgba(0, 150, 255, 0.3);
+    color: white;
+    left: 50%;
+    max-width: 500px;
+    padding: 3em 2.5em;
+    position: fixed;
+    text-align: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+}
+
+/* Emoji grande arriba del modal con animación de rebote */
+.modal-emoji {
+    font-size: 70px;
+    margin-bottom: 0.3em;
+    animation: bounce 1s infinite alternate;
+}
+
+/* Título del modal en azul claro */
+.modal-caja h2 {
+    font-family: Arial, sans-serif;
+    font-size: 2em;
+    margin-bottom: 0.3em;
+    color: #7ecfff;
+    text-shadow: 0 0 10px rgba(126, 207, 255, 0.6);
+}
+
+/* Subtítulo del modal */
+.modal-sub {
+    color: rgba(255,255,255,0.7);
+    font-family: Arial, sans-serif;
+    font-size: 1.1em;
+    margin-bottom: 1.5em;
+}
+
+/* Botón principal de los modales con degradado azul */
+.modal-caja button {
+    background: linear-gradient(90deg, #0070f3, #00c6ff);
+    border: none;
+    border-radius: 2em;
+    color: white;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 0.7em 2.5em;
+    margin: 0.3em;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 15px rgba(0, 112, 243, 0.5);
+}
+.modal-caja button:hover {
+    transform: scale(1.06);
+    box-shadow: 0 6px 20px rgba(0, 198, 255, 0.6);
+}
+.modal-caja button:active {
+    transform: scale(0.97);
+}
+
+/* Botón salir con degradado rojo */
+.btn-salir {
+    background: linear-gradient(90deg, #c0392b, #e74c3c) !important;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.5) !important;
+}
+.btn-salir:hover {
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.7) !important;
+}
+
+/* Contenedor de botones del resultado final */
+.resultado-botones {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    margin-top: 1em;
+    flex-wrap: wrap;
+}
+
+/* Emoji del resultado con animación de rebote */
+.resultado-emoji {
+    font-size: 80px;
+    margin-bottom: 0.2em;
+    animation: bounce 0.8s infinite alternate;
+}
+
+/* Nivel mostrado en resultado */
+.resultado-nivel {
+    color: #a8e6cf;
+    font-family: Arial, sans-serif;
+    font-size: 1.1em;
+    margin-bottom: 0.5em;
+}
+
+/* Puntaje en resultado con fondo semitransparente */
+.resultado-puntaje {
+    background: rgba(255,255,255,0.1);
+    border-radius: 1em;
+    color: white;
+    display: inline-block;
+    font-family: Arial, sans-serif;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 1em;
+    padding: 0.4em 1.5em;
+}
+
+/* Texto del Tigre Cepeda en rojo */
+.tigre-texto {
+    color: #ff6b6b !important;
+    text-shadow: 0 0 10px rgba(255, 107, 107, 0.6) !important;
+}
+
+/* Animación de rebote para los emojis de los modales */
+@keyframes bounce {
+    from { transform: translateY(0px); }
+    to   { transform: translateY(-12px); }
+}
+
+/* FIN EDITADO POR CARLOS MONETTROSA */
