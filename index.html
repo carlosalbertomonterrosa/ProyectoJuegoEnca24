@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <link rel="stylesheet" href="css/estilos.css">
     <meta charset="UTF-8">
-    <!-- EDITADO POR CARLOS MONETTROSA: viewport para responsividad móvil -->
+    <!-- EDITADO POR CARLOS MONETTROSA: viewport para responsividad -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- EDITADO POR CARLOS MONETTROSA: fuente estilo tiza para la pizarra -->
+    <!-- EDITADO POR CARLOS MONETTROSA: fuente estilo tiza -->
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
-    <title>Juego</title>
+    <title>Juego del Tigre 🐯</title>
 </head>
 <body>
 
@@ -17,22 +17,17 @@
         <button id="reiniciar">reiniciar</button>
     </div>
 
-    <!-- EDITADO POR CARLOS MONETTROSA: Modal de bienvenida con nombre del jugador -->
-    <!-- Aparece justo después de escribir el nombre y hacer clic en Empezar -->
+    <!-- EDITADO POR CARLOS MONETTROSA: Modal bienvenida -->
     <div id="modal-bienvenida" class="modal-overlay">
         <div class="modal-caja">
             <div class="modal-emoji">🎮</div>
             <h2 id="modal-texto">¡Bienvenido!</h2>
-            <p class="modal-sub">
-                Responde lo más rápido que puedas<br>o te muerde el Tigre 🐯
-            </p>
+            <p class="modal-sub">Responde lo más rápido que puedas<br>o te muerde el Tigre 🐯</p>
             <button id="modal-cerrar">¡Vamos a jugar!</button>
         </div>
     </div>
-    <!-- FIN EDITADO POR CARLOS MONETTROSA: Modal bienvenida -->
 
-    <!-- EDITADO POR CARLOS MONETTROSA: Modal resultado final con niveles -->
-    <!-- Se muestra cuando el tiempo llega a 0 -->
+    <!-- EDITADO POR CARLOS MONETTROSA: Modal resultado final -->
     <div id="modal-resultado" class="modal-overlay">
         <div class="modal-caja">
             <div class="resultado-emoji" id="resultado-emoji">🏆</div>
@@ -45,10 +40,8 @@
             </div>
         </div>
     </div>
-    <!-- FIN EDITADO POR CARLOS MONETTROSA: Modal resultado -->
 
-    <!-- EDITADO POR CARLOS MONETTROSA: Modal del Tigre Cepeda al salir -->
-    <!-- Aparece cuando el jugador presiona el botón Salir -->
+    <!-- EDITADO POR CARLOS MONETTROSA: Modal Tigre Cepeda -->
     <div id="modal-salida" class="modal-overlay">
         <div class="modal-caja">
             <div class="modal-emoji">🐯</div>
@@ -57,12 +50,10 @@
             <button id="btn-cerrar-salida">Cerrar</button>
         </div>
     </div>
-    <!-- FIN EDITADO POR CARLOS MONETTROSA: Modal salida -->
 
-    <!-- Código original del equipo — audios NO modificados -->
+    <!-- Código original del equipo — audios -->
     <audio id="audiogeneral" loop>
         <source src="sonidos/general.mp3" type="audio/mpeg">
-        Sonido no disponible
     </audio>
     <audio id="audiovictoria">
         <source src="sonidos/win.mp3" type="audio/mpeg">
@@ -77,8 +68,8 @@
         <source src="sonidos/botonsound.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Código original del equipo — estructura del juego NO modificada -->
-    <button class="iniciar">👌Iniciar Juego</button>
+    <!-- Código original del equipo — botón iniciar -->
+    <button class="iniciar">👌 Iniciar Juego</button>
 
     <section class="contenido">
         <article class="presentacion">
@@ -93,58 +84,47 @@
             <input type="number" id="numero1" readonly>
             ➕
             Numero 2:
-            <input type="number" id="numero2" readonly> <br>
+            <input type="number" id="numero2" readonly><br>
             Respuesta:
-            <input type="number" id="respuestausuario"> <br>
+            <input type="number" id="respuestausuario"><br>
             <button id="responder">Responder la suma</button>
         </div>
     </section>
 
-    <!-- Código original del equipo — jQuery NO modificado -->
+    <!-- EDITADO POR CARLOS MONETTROSA: Botón que lleva al juego del muñeco -->
+    <button id="btn-juego-real" onclick="window.location.href='muneco.html'">
+        🔥 Dale click aquí para jugar de verdad
+    </button>
+
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
     <script src="js/funciones.js"></script>
 
-    <!-- EDITADO POR CARLOS MONETTROSA: Script de modales, bienvenida y niveles -->
+    <!-- EDITADO POR CARLOS MONETTROSA: modales y lógica de niveles -->
     <script>
-        // EDITADO POR CARLOS MONETTROSA
-        // Contador global de respuestas correctas, lo usa funciones.js también
         window.respuestasCorrectas = 0;
 
-        // EDITADO POR CARLOS MONETTROSA
-        // Abre el modal de bienvenida con el nombre que ingresó el jugador
         window.mostrarBienvenida = function(nombre) {
             $('#modal-texto').text('¡Bienvenido, ' + nombre + '!');
             $('#modal-bienvenida').fadeIn(300);
         };
 
-        // EDITADO POR CARLOS MONETTROSA
-        // Cierra el modal de bienvenida
         $('#modal-cerrar').on('click', function() {
             $('#modal-bienvenida').fadeOut(200);
         });
 
-        // EDITADO POR CARLOS MONETTROSA
-        // Muestra el resultado final con niveles según cuántas acertó:
-        // 5 o más → nivel Mario 🍄
-        // 3 o 4   → nivel Einstein 🧠
-        // menos   → nivel IA 🤖
         window.mostrarResultadoFinal = function(correctas) {
             var emoji, titulo, nivel;
-
             if (correctas >= 5) {
-                emoji  = '🍄';
-                titulo = '¡Eres nivel Mario!';
-                nivel  = 'Maestro de las sumas. ¡Impresionante!';
+                emoji = '🍄'; titulo = '¡Eres nivel Mario!';
+                nivel = 'Maestro de las sumas. ¡Impresionante!';
             } else if (correctas >= 3) {
-                emoji  = '🧠';
-                titulo = '¡Eres nivel Einstein!';
-                nivel  = 'Muy bien, casi genio.';
+                emoji = '🧠'; titulo = '¡Eres nivel Einstein!';
+                nivel = 'Muy bien, casi genio.';
             } else {
-                emoji  = '🤖';
-                titulo = '¡Eres nivel IA!';
-                nivel  = 'Tranquilo, la máquina también falla a veces.';
+                emoji = '🤖'; titulo = '¡Eres nivel IA!';
+                nivel = 'Tranquilo, la máquina también falla a veces.';
             }
-
             $('#resultado-emoji').text(emoji);
             $('#resultado-titulo').text(titulo);
             $('#resultado-nivel').text(nivel);
@@ -152,31 +132,21 @@
             $('#modal-resultado').fadeIn(300);
         };
 
-        // EDITADO POR CARLOS MONETTROSA
-        // Botón "Volver a jugar": cierra modal y muestra el botón iniciar
         $('#btn-volver-jugar').on('click', function() {
             $('#modal-resultado').fadeOut(200);
-            // EDITADO POR CARLOS MONETTROSA: restaura fondo original
             $('body').css('background', 'linear-gradient(135deg, #0f0c29, #302b63, #24243e)');
             $('.iniciar').fadeIn(200);
         });
 
-        // EDITADO POR CARLOS MONETTROSA
-        // Botón "Salir": cierra resultado y abre el modal del Tigre Cepeda
         $('#btn-salir').on('click', function() {
             $('#modal-resultado').fadeOut(200);
-            setTimeout(function() {
-                $('#modal-salida').fadeIn(300);
-            }, 250);
+            setTimeout(function() { $('#modal-salida').fadeIn(300); }, 250);
         });
 
-        // EDITADO POR CARLOS MONETTROSA
-        // Cierra el modal del Tigre Cepeda
         $('#btn-cerrar-salida').on('click', function() {
             $('#modal-salida').fadeOut(200);
         });
     </script>
-    <!-- FIN EDITADO POR CARLOS MONETTROSA: Script de modales -->
 
 </body>
 </html>

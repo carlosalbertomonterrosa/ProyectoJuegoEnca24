@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <title>🔥 Juego del Muñeco — Tigre Cepeda</title>
+    <style>
+        /* EDITADO POR CARLOS MONETTROSA — estilos exclusivos del juego del muñeco */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Caveat', cursive;
+            padding: 1em;
+        }
+
+        h1.titulo-muneco {
+            color: #ffd200;
+            font-size: clamp(24px, 4vw, 36px);
+            text-align: center;
+            margin-bottom: 0.3em;
+            text-shadow: 0 0 20px rgba(255,210,0,0.5);
+        }
+
+        .subtitulo {
+            color: rgba(255,255,255,0.6);
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-bottom: 1em;
+        }
+
+        /* Contenedor principal */
+        .muneco-contenedor {
+            display: flex;
+            gap: 1.5em;
+            align-items: flex-start;
+            justify-content: center;
+            width: 100%;
+            max-width: 780px;
+            flex-wrap: wrap;
+        }
+
+        /* Panel izquierdo — muñeco SVG */
+        .panel-muneco {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 2px solid rgba(100,200,255,0.2);
+            border-radius: 1.2em;
+            padding: 1.5em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 220px;
+        }
+
+        #muneco-svg {
+            transition: transform 0.1s;
+        }
+
+        /* Partes del muñeco ocultas por defecto */
+        .parte-muneco {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        /* Efecto ardiendo */
+        .ardiendo {
+            filter: drop-shadow(0 0 8px #ff6600) drop-shadow(0 0 16px #ff0000) !important;
+            animation: quemar 0.6s ease-out;
+        }
+
+        @keyframes quemar {
+            0%   { filter: drop-shadow(0 0 2px #ff6600); }
+            50%  { filter: drop-shadow(0 0 20px #ff0000) drop-shadow(0 0 30px #ff6600); }
+            100% { filter: drop-shadow(0 0 5px #ff4400); }
+        }
+
+        /* Corazones de vida */
+        #muneco-vidas {
+            font-size: 22px;
+            margin-top: 0.8em;
+            letter-spacing: 3px;
+        }
+
+        /* Panel derecho — pizarra */
+        .panel-juego {
+            flex: 1;
+            min-width: 260px;
+        }
+
+        /* Pizarra verde */
+        #muneco-pizarra {
+            background: linear-gradient(135deg, #1a4a1a 0%, #2d6a2d 50%, #1a4a1a 100%);
+            border: 5px solid #4a7c4a;
+            border-radius: 1em;
+            box-shadow: inset 0 0 60px rgba(0,0,0,0.5), 0 0 20px rgba(0,0,0,0.5);
+            padding: 1.5em;
+            text-align: center;
+            color: white;
+            transition: border-color 0.3s, transform 0.15s;
+            margin-bottom: 1em;
+        }
+
+        .m-label {
+            font-size: 20px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 0.3em;
+        }
+
+        .m-numeros {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3em;
+            margin-bottom: 0.8em;
+        }
+
+        .m-numero {
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            min-width: 70px;
+            text-align: center;
+            border-bottom: 3px dashed rgba(255,255,255,0.5);
+        }
+
+        .m-mas {
+            font-size: 40px;
+            color: #ffd200;
+        }
+
+        #m-respuesta {
+            background: rgba(255,255,255,0.08);
+            border: 2px dashed rgba(255,255,255,0.5);
+            border-radius: 0.5em;
+            color: white;
+            font-family: 'Caveat', cursive;
+            font-size: 40px;
+            font-weight: bold;
+            padding: 0.2em 0.5em;
+            text-align: center;
+            text-shadow: 0 0 8px rgba(255,255,255,0.4);
+            width: 80%;
+            display: block;
+            margin: 0 auto 0.8em auto;
+        }
+
+        #m-respuesta:focus {
+            outline: none;
+            border-color: #ffd200;
+        }
+
+        #m-btn-responder {
+            background: linear-gradient(90deg, #388e3c, #66bb6a);
+            border: none;
+            border-radius: 2em;
+            color: white;
+            cursor: pointer;
+            font-family: 'Caveat', cursive;
+            font-size: 22px;
+            font-weight: bold;
+            padding: 0.5em 2em;
+            transition: transform 0.15s;
+            width: 80%;
+        }
+        #m-btn-responder:hover { transform: scale(1.05); }
+
+        /* Stats */
+        .m-stats {
+            display: flex;
+            gap: 1em;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .m-stat-caja {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 1em;
+            padding: 0.8em 1.5em;
+            text-align: center;
+            color: white;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .m-stat-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            font-family: Arial, sans-serif;
+            margin-bottom: 0.2em;
+        }
+
+        .m-stat-valor {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ffd200;
+        }
+
+        #m-timer { color: #ffd200; }
+
+        /* Game over overlay */
+        #muneco-gameover {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,20,0.92);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .go-caja {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            border: 2px solid rgba(255,100,100,0.4);
+            border-radius: 1.5em;
+            box-shadow: 0 0 40px rgba(255,80,80,0.3);
+            color: white;
+            max-width: 400px;
+            padding: 3em 2.5em;
+            text-align: center;
+            width: 90%;
+        }
+
+        #go-emoji {
+            font-size: 80px;
+            display: block;
+            margin-bottom: 0.2em;
+            animation: bounce 0.8s infinite alternate;
+        }
+
+        #go-titulo {
+            font-family: Arial, sans-serif;
+            font-size: 1.8em;
+            color: #ff6b6b;
+            margin-bottom: 0.3em;
+            text-shadow: 0 0 10px rgba(255,107,107,0.5);
+        }
+
+        #go-sub {
+            color: rgba(255,255,255,0.7);
+            font-family: Arial, sans-serif;
+            margin-bottom: 0.5em;
+        }
+
+        #go-puntaje {
+            background: rgba(255,255,255,0.1);
+            border-radius: 1em;
+            display: inline-block;
+            font-family: Arial, sans-serif;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 1.5em;
+            padding: 0.4em 1.5em;
+        }
+
+        .go-botones {
+            display: flex;
+            gap: 1em;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .go-botones button {
+            border: none;
+            border-radius: 2em;
+            color: white;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 1.1em;
+            font-weight: bold;
+            padding: 0.7em 2em;
+            transition: transform 0.15s;
+        }
+        .go-botones button:hover { transform: scale(1.05); }
+
+        #go-btn-reiniciar {
+            background: linear-gradient(90deg, #0070f3, #00c6ff);
+        }
+        #go-btn-volver {
+            background: linear-gradient(90deg, #c0392b, #e74c3c);
+        }
+
+        /* Botón volver */
+        #btn-volver-inicio {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 2em;
+            color: rgba(255,255,255,0.6);
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            margin-top: 1em;
+            padding: 0.5em 1.5em;
+            transition: all 0.15s;
+        }
+        #btn-volver-inicio:hover {
+            border-color: rgba(255,255,255,0.7);
+            color: white;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to   { transform: translateY(-12px); }
+        }
+
+        /* Llamas decorativas en game over de muerte */
+        .llama {
+            font-size: 30px;
+            animation: flamear 0.5s infinite alternate;
+            display: inline-block;
+        }
+        @keyframes flamear {
+            from { transform: scaleY(1) rotate(-5deg); }
+            to   { transform: scaleY(1.2) rotate(5deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .muneco-contenedor { flex-direction: column; align-items: center; }
+            .panel-muneco { width: 100%; max-width: 340px; }
+            .panel-juego { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="titulo-muneco">🐯 Juego del Muñeco</h1>
+    <p class="subtitulo">Falla y el Tigre Cepeda quema al muñeco — responde rápido</p>
+
+    <div class="muneco-contenedor">
+
+        <!-- Panel muñeco SVG -->
+        <div class="panel-muneco">
+            <svg id="muneco-svg" width="180" height="240" viewBox="0 0 180 240">
+                <!-- Estructura: horca / soporte -->
+                <line x1="20" y1="230" x2="160" y2="230" stroke="#8B6914" stroke-width="6" stroke-linecap="round"/>
+                <line x1="40" y1="10"  x2="40"  y2="230" stroke="#8B6914" stroke-width="6" stroke-linecap="round"/>
+                <line x1="40" y1="10"  x2="110" y2="10"  stroke="#8B6914" stroke-width="6" stroke-linecap="round"/>
+                <line x1="110" y1="10" x2="110" y2="38"  stroke="#8B6914" stroke-width="5" stroke-linecap="round"/>
+
+                <!-- Cabeza -->
+                <circle id="parte-cabeza" class="parte-muneco" cx="110" cy="55" r="18"
+                    fill="none" stroke="#ffcc88" stroke-width="4"/>
+
+                <!-- Ojos normales (se muestran con la cabeza, se reemplazan al quemarse) -->
+                <circle id="parte-ojo-der" class="parte-muneco" cx="104" cy="52" r="3"
+                    fill="#ff4444"/>
+                <circle id="parte-ojo-izq" class="parte-muneco" cx="116" cy="52" r="3"
+                    fill="#ff4444"/>
+
+                <!-- Cuerpo -->
+                <line id="parte-cuerpo" class="parte-muneco"
+                    x1="110" y1="73" x2="110" y2="140"
+                    stroke="#ffcc88" stroke-width="4" stroke-linecap="round"/>
+
+                <!-- Brazo derecho -->
+                <line id="parte-brazo-der" class="parte-muneco"
+                    x1="110" y1="90" x2="80" y2="120"
+                    stroke="#ffcc88" stroke-width="4" stroke-linecap="round"/>
+
+                <!-- Brazo izquierdo -->
+                <line id="parte-brazo-izq" class="parte-muneco"
+                    x1="110" y1="90" x2="140" y2="120"
+                    stroke="#ffcc88" stroke-width="4" stroke-linecap="round"/>
+
+                <!-- Pierna derecha -->
+                <line id="parte-pierna-der" class="parte-muneco"
+                    x1="110" y1="140" x2="85" y2="185"
+                    stroke="#ffcc88" stroke-width="4" stroke-linecap="round"/>
+
+                <!-- Pierna izquierda -->
+                <line id="parte-pierna-izq" class="parte-muneco"
+                    x1="110" y1="140" x2="135" y2="185"
+                    stroke="#ffcc88" stroke-width="4" stroke-linecap="round"/>
+
+                <!-- Llamas (siempre visibles abajo del muñeco, se intensifican) -->
+                <text id="llamas-svg" x="72" y="220" font-size="28" opacity="0.15">🔥🔥🔥</text>
+            </svg>
+
+            <!-- Corazones -->
+            <div id="muneco-vidas">❤️❤️❤️❤️❤️❤️❤️❤️</div>
+        </div>
+
+        <!-- Panel pizarra + juego -->
+        <div class="panel-juego">
+            <div id="muneco-pizarra">
+                <div class="m-label">¿Cuánto es?</div>
+                <div class="m-numeros">
+                    <span id="m-num1" class="m-numero">?</span>
+                    <span class="m-mas">➕</span>
+                    <span id="m-num2" class="m-numero">?</span>
+                </div>
+                <input type="number" id="m-respuesta" placeholder="Tu respuesta...">
+                <button id="m-btn-responder">Responder 🐯</button>
+            </div>
+
+            <!-- Stats -->
+            <div class="m-stats">
+                <div class="m-stat-caja">
+                    <div class="m-stat-label">⏱ Tiempo</div>
+                    <div class="m-stat-valor" id="m-timer">30</div>
+                </div>
+                <div class="m-stat-caja">
+                    <div class="m-stat-label">✅ Aciertos</div>
+                    <div class="m-stat-valor" id="m-aciertos">0</div>
+                </div>
+                <div class="m-stat-caja">
+                    <div class="m-stat-label">💀 Errores</div>
+                    <div class="m-stat-valor" id="m-errores-display">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id="btn-volver-inicio" onclick="window.location.href='index.html'">
+        ← Volver al juego original
+    </button>
+
+    <!-- Game Over overlay -->
+    <div id="muneco-gameover">
+        <div class="go-caja">
+            <span id="go-emoji">🔥</span>
+            <h2 id="go-titulo">¡El muñeco se quemó!</h2>
+            <p id="go-sub">¡Te mordió el Tigre Cepeda! 😂</p>
+            <p id="go-puntaje">Respuestas correctas: 0</p>
+            <div class="go-botones">
+                <button id="go-btn-reiniciar">🔄 Otra vez</button>
+                <button id="go-btn-volver" onclick="window.location.href='index.html'">🏠 Volver</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/muneco.js"></script>
+    <script>
+        // EDITADO POR CARLOS MONETTROSA — iniciar juego del muñeco
+        JuegoMuneco.iniciar();
+
+        // Botón responder
+        document.getElementById('m-btn-responder').addEventListener('click', function() {
+            JuegoMuneco.evaluar();
+        });
+
+        // Enter también responde
+        document.getElementById('m-respuesta').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') JuegoMuneco.evaluar();
+        });
+
+        // Botón reiniciar en game over
+        document.getElementById('go-btn-reiniciar').addEventListener('click', function() {
+            JuegoMuneco.iniciar();
+        });
+
+        // Sincroniza display de errores
+        var erroresOrig = JuegoMuneco.evaluar;
+        setInterval(function() {
+            // Lee el texto de vidas para calcular errores
+            var vidas = document.getElementById('muneco-vidas').textContent;
+            var negros = (vidas.match(/🖤/g) || []).length;
+            document.getElementById('m-errores-display').textContent = negros;
+
+            // Intensifica llamas según errores
+            var llamas = document.getElementById('llamas-svg');
+            if (negros > 0) {
+                llamas.style.opacity = Math.min(negros * 0.12, 1).toString();
+                llamas.style.fontSize = (28 + negros * 2) + 'px';
+            }
+        }, 300);
+    </script>
+</body>
+</html>

@@ -19,6 +19,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
 }
 
 /* EDITADO POR CARLOS MONETTROSA
@@ -38,21 +40,18 @@ button.iniciar {
     font-size: 30px;
     font-style: italic;
     padding: 0.8em 1.5em;
-    /* EDITADO POR CARLOS MONETTROSA: centrado fijo en pantalla */
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 420px;
     max-width: 90vw;
-    /* EDITADO POR CARLOS MONETTROSA: degradado dorado */
     background: linear-gradient(90deg, #f7971e, #ffd200);
     border: none;
     transition: transform 0.15s;
     z-index: 1;
 }
 
-/* EDITADO POR CARLOS MONETTROSA */
 button.iniciar:hover {
     transform: translate(-50%, -50%) scale(1.04);
 }
@@ -69,7 +68,6 @@ button.iniciar:hover {
     right: 10px;
     top: 10%;
     z-index: 2;
-    /* EDITADO POR CARLOS MONETTROSA: color blanco por defecto */
     color: white;
 }
 
@@ -92,8 +90,7 @@ button.iniciar:hover {
     z-index: 4;
 }
 
-/* EDITADO POR CARLOS MONETTROSA
-   Presentación con degradado oscuro azulado */
+/* EDITADO POR CARLOS MONETTROSA */
 .presentacion {
     background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
     box-shadow: var(--configuracion-sombra) var(--sombra-color);
@@ -108,7 +105,6 @@ button.iniciar:hover {
     width: 100%;
 }
 
-/* EDITADO POR CARLOS MONETTROSA: input del nombre */
 .presentacion input {
     width: 80%;
     padding: 0.4em 0.8em;
@@ -121,7 +117,6 @@ button.iniciar:hover {
     margin: 0.5em 0;
 }
 
-/* EDITADO POR CARLOS MONETTROSA: botón empezar */
 .presentacion button {
     background: linear-gradient(90deg, #0070f3, #00c6ff);
     border: none;
@@ -140,19 +135,13 @@ button.iniciar:hover {
 
 /* ============================================
    EDITADO POR CARLOS MONETTROSA
-   Fuente estilo tiza para la pizarra
+   Pizarra verde con tiza
    ============================================ */
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
-
-/* EDITADO POR CARLOS MONETTROSA
-   Sección del juego — pizarra verde con tiza */
 #juego {
     background: linear-gradient(135deg, #1a4a1a 0%, #2d6a2d 50%, #1a4a1a 100%);
     border: 6px solid #4a7c4a;
     border-radius: 1em;
-    box-shadow:
-        inset 0 0 80px rgba(0,0,0,0.5),
-        0 0 30px rgba(0,0,0,0.6);
+    box-shadow: inset 0 0 80px rgba(0,0,0,0.5), 0 0 30px rgba(0,0,0,0.6);
     margin: 0 auto;
     padding: 2em 1.5em;
     text-align: center;
@@ -163,8 +152,6 @@ button.iniciar:hover {
     letter-spacing: 1px;
 }
 
-/* EDITADO POR CARLOS MONETTROSA
-   Inputs de los números estilo tiza */
 #numero1, #numero2 {
     background: transparent;
     border: none;
@@ -175,15 +162,11 @@ button.iniciar:hover {
     font-weight: bold;
     letter-spacing: 2px;
     text-align: center;
-    text-shadow:
-        0 0 10px rgba(255,255,255,0.5),
-        1px 1px 3px rgba(0,0,0,0.5);
+    text-shadow: 0 0 10px rgba(255,255,255,0.5), 1px 1px 3px rgba(0,0,0,0.5);
     width: 110px;
     margin: 0 0.2em;
 }
 
-/* EDITADO POR CARLOS MONETTROSA
-   Input de respuesta del jugador */
 #respuestausuario {
     background: rgba(255,255,255,0.08);
     border: 2px dashed rgba(255,255,255,0.5);
@@ -199,8 +182,6 @@ button.iniciar:hover {
     width: 80%;
 }
 
-/* EDITADO POR CARLOS MONETTROSA
-   Botón responder estilo pizarra */
 #responder {
     background: linear-gradient(90deg, #388e3c, #66bb6a);
     border: none;
@@ -224,49 +205,27 @@ button.iniciar:hover {
    Responsividad
    ============================================ */
 @media (max-width: 768px) {
-    button.iniciar {
-        font-size: 22px;
-        width: 90vw;
-    }
-    #tiempo {
-        font-size: 80px;
-        right: 5px;
-    }
-    .presentacion {
-        font-size: 22px;
-    }
+    button.iniciar { font-size: 22px; width: 90vw; }
+    #tiempo { font-size: 80px; right: 5px; }
+    .presentacion { font-size: 22px; }
 }
 
 @media (max-width: 480px) {
-    button.iniciar {
-        font-size: 18px;
-        width: 95vw;
-    }
-    #tiempo {
-        font-size: 60px;
-    }
-    #numero1, #numero2 {
-        font-size: 36px;
-        width: 80px;
-    }
-    .presentacion {
-        font-size: 18px;
-        padding: 1.5em 1em;
-    }
+    button.iniciar { font-size: 18px; width: 95vw; }
+    #tiempo { font-size: 60px; }
+    #numero1, #numero2 { font-size: 36px; width: 80px; }
+    .presentacion { font-size: 18px; padding: 1.5em 1em; }
 }
-/* FIN EDITADO POR CARLOS MONETTROSA — Responsividad */
 
 /* ============================================
    EDITADO POR CARLOS MONETTROSA
-   Modales: bienvenida, resultado y tigre cepeda
+   Modales
    ============================================ */
 .modal-overlay {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background: rgba(0,0,20,0.85);
     z-index: 100;
 }
@@ -277,8 +236,7 @@ button.iniciar:hover {
     border-radius: 1.5em;
     box-shadow: 0 0 40px rgba(0,150,255,0.3);
     color: white;
-    left: 50%;
-    max-width: 420px;
+    left: 50%; max-width: 420px;
     padding: 3em 2.5em;
     position: fixed;
     text-align: center;
@@ -322,53 +280,36 @@ button.iniciar:hover {
     transition: transform 0.15s, box-shadow 0.15s;
     box-shadow: 0 4px 15px rgba(0,112,243,0.5);
 }
-.modal-caja button:hover {
-    transform: scale(1.06);
-    box-shadow: 0 6px 20px rgba(0,198,255,0.6);
-}
-.modal-caja button:active {
-    transform: scale(0.97);
-}
+.modal-caja button:hover { transform: scale(1.06); }
+.modal-caja button:active { transform: scale(0.97); }
 
 .btn-salir {
     background: linear-gradient(90deg, #c0392b, #e74c3c) !important;
     box-shadow: 0 4px 15px rgba(231,76,60,0.5) !important;
 }
-.btn-salir:hover {
-    box-shadow: 0 6px 20px rgba(231,76,60,0.7) !important;
-}
 
 .resultado-botones {
-    display: flex;
-    gap: 1em;
+    display: flex; gap: 1em;
     justify-content: center;
-    margin-top: 1em;
-    flex-wrap: wrap;
+    margin-top: 1em; flex-wrap: wrap;
 }
 
 .resultado-emoji {
-    font-size: 80px;
-    margin-bottom: 0.2em;
+    font-size: 80px; margin-bottom: 0.2em;
     animation: bounce 0.8s infinite alternate;
 }
 
 .resultado-nivel {
-    color: #a8e6cf;
-    font-family: Arial, sans-serif;
-    font-size: 1.1em;
-    margin-bottom: 0.5em;
+    color: #a8e6cf; font-family: Arial, sans-serif;
+    font-size: 1.1em; margin-bottom: 0.5em;
 }
 
 .resultado-puntaje {
     background: rgba(255,255,255,0.1);
-    border-radius: 1em;
-    color: white;
-    display: inline-block;
-    font-family: Arial, sans-serif;
-    font-size: 1.3em;
-    font-weight: bold;
-    margin-bottom: 1em;
-    padding: 0.4em 1.5em;
+    border-radius: 1em; color: white;
+    display: inline-block; font-family: Arial, sans-serif;
+    font-size: 1.3em; font-weight: bold;
+    margin-bottom: 1em; padding: 0.4em 1.5em;
 }
 
 .tigre-texto {
@@ -380,4 +321,30 @@ button.iniciar:hover {
     from { transform: translateY(0px); }
     to   { transform: translateY(-12px); }
 }
-/* FIN EDITADO POR CARLOS MONETTROSA */
+
+/* ============================================
+   EDITADO POR CARLOS MONETTROSA
+   Botón para abrir el juego del muñeco
+   ============================================ */
+#btn-juego-real {
+    background: linear-gradient(90deg, #ff416c, #ff4b2b);
+    border: none;
+    border-radius: 2em;
+    box-shadow: 0 4px 20px rgba(255,65,108,0.6);
+    color: white;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 1em;
+    padding: 0.8em 2em;
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: block;
+    text-align: center;
+    width: 100%;
+    max-width: 420px;
+}
+#btn-juego-real:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 25px rgba(255,65,108,0.8);
+}
