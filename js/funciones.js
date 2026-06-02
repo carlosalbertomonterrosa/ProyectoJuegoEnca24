@@ -8,6 +8,11 @@ var b=parseInt(Math.random()*10)+1;
 var respuestacorrecta=a+b;
 $("#numero1").val(a);
 $("#numero2").val(b);
+var elementoSonidoGeneral=$("#audiogeneral")[0];
+var elementoSonidoVictoria=$("#audiovictoria")[0];
+var elementoSonidoPerdida=$("#audioperdida")[0];
+var elementoSonidoTimeOut=$("#audiotimeout")[0];
+var elementoSonidoBoton=$("#sonidoboton")[0];
 
 
 $("#reiniciar").on("click",function(){
@@ -16,6 +21,7 @@ $("#reiniciar").on("click",function(){
 
 // para empezar a jugar 
 $("#empezar").on("click",function(){
+    elementoSonidoBoton.play();
     $(".presentacion").slideUp("fast");
     $("#juego").slideDown("fast");
     $("#tiempo").html(tiempo);
@@ -29,8 +35,12 @@ $("#empezar").on("click",function(){
             $("#tiempo").css("color","red");
             $("body").css("background","salmon");
         }
-         if(tiempo==0){
+        if(tiempo==0){            
             clearInterval(intervalo);
+            elementoSonidoGeneral.pause();
+            elementoSonidoTimeOut.play();
+            elementoSonidoTimeOut.volume=0.3;
+        
             if(contesto==0){
                 $(".gameover,.mensajeover").fadeIn("fast");
             } 
@@ -41,6 +51,10 @@ $("#empezar").on("click",function(){
 
 // referencia al btn iniciar  esperando evento click  ejecuta 
 $(".iniciar").on("click",function(){
+    elementoSonidoBoton.play();
+    //sonido
+    elementoSonidoGeneral.volume=0.25;
+    elementoSonidoGeneral.play(); 
     // animacion al boton de desvanecer en fast segundios
     // cuando termina la animacion  ejecuta funcion anonima
     $(this).fadeOut("fast",function(){
@@ -60,8 +74,12 @@ function evaluar(){
     if(resuser==respuestacorrecta){
         contesto=1;
         alert("Saber Sumar 😃");
+        elementoSonidoVictoria.play();
+        elementoSonidoVictoria.volume=0.2;
     }else{
         alert("Repasar sumas de primara mucha calcu IA 😢");
+        elementoSonidoPerdida.play();
+        elementoSonidoPerdida.volume=0.3;
     }
 }
 $(document).on("keypress",function(event){
