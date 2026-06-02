@@ -13,7 +13,7 @@ var elementoSonidoVictoria=$("#audiovictoria")[0];
 var elementoSonidoPerdida=$("#audioperdida")[0];
 var elementoSonidoTimeOut=$("#audiotimeout")[0];
 var elementoSonidoBoton=$("#sonidoboton")[0];
-
+var dificultad="facil";
 
 $("#reiniciar").on("click",function(){
     location="index.html";
@@ -83,7 +83,7 @@ function evaluar(){
     }
 }
 $(document).on("keypress",function(event){
-    if(event.which==32){
+    if(event.which==13){
         evaluar();
     }
 });
