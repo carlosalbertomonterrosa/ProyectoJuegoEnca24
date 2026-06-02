@@ -13,14 +13,50 @@ var elementoSonidoVictoria=$("#audiovictoria")[0];
 var elementoSonidoPerdida=$("#audioperdida")[0];
 var elementoSonidoTimeOut=$("#audiotimeout")[0];
 var elementoSonidoBoton=$("#sonidoboton")[0];
-var dificultad="facil";
+var confirinijuego= 0;
 
-$("#reiniciar").on("click",function(){
-    location="index.html";
+// referencia al btn iniciar  esperando evento click  ejecuta 
+$(".iniciar").on("click",function(){
+    // sonido de click al oprimir un boton
+    elementoSonidoBoton.play();
+    //sonido de fondo general
+    elementoSonidoGeneral.volume=0.25;
+    elementoSonidoGeneral.play(); 
+    // animacion al boton de desvanecer en fast segundios
+    // cuando termina la animacion  ejecuta funcion anonima
+    $(this).fadeOut("fast",function(){
+        //   muestra la presentacion  
+        $(".presentacion").fadeIn("fast");
+        $("#empezar").css("display","none");
+    });
 });
 
-// para empezar a jugar 
+// ejecucion botones de dificultad:
+$("#facil").on("click",function(){
+    tiempo=20;
+    elementoSonidoBoton.play();
+    $("#empezar").css("display","inline");
+    $("#facil").css("box-shadow","0 0 36px rgba(32, 250, 4, 0.55)");
+    $("#medio,#dificil").css("box-shadow","none");
+});
+$("#medio").on("click",function(){
+    tiempo=14;
+    elementoSonidoBoton.play();
+    $("#empezar").css("display","inline");
+    $("#medio").css("box-shadow","0 0 36px rgba(255, 255, 4, 0.54)");
+    $("#facil,#dificil").css("box-shadow","none");
+});
+$("#dificil").on("click",function(){
+    tiempo=8;
+    elementoSonidoBoton.play();
+    $("#empezar").css("display","inline");
+    $("#dificil").css("box-shadow","0 0 36px rgba(255, 4, 4, 0.59)");
+    $("#medio,#facil").css("box-shadow","none");
+});
+
+// ejecucion boton "empezar juego" a jugar luego de la presentacion:
 $("#empezar").on("click",function(){
+    confirinijuego= 1;
     elementoSonidoBoton.play();
     $(".presentacion").slideUp("fast");
     $("#juego").slideDown("fast");
@@ -49,41 +85,28 @@ $("#empezar").on("click",function(){
 });
 
 
-// referencia al btn iniciar  esperando evento click  ejecuta 
-$(".iniciar").on("click",function(){
-    elementoSonidoBoton.play();
-    //sonido
-    elementoSonidoGeneral.volume=0.25;
-    elementoSonidoGeneral.play(); 
-    // animacion al boton de desvanecer en fast segundios
-    // cuando termina la animacion  ejecuta funcion anonima
-    $(this).fadeOut("fast",function(){
-        //   muestra la presentacion  
-        $(".presentacion").fadeIn("fast");
-    });
-});
-
-
-
-
-
+// ejecucion boton de responder
 $("#responder").on("click",evaluar);
 
 function evaluar(){
     var resuser=$("#respuestausuario").val();
-    if(resuser==respuestacorrecta){
+    if (resuser==respuestacorrecta){
         contesto=1;
-        alert("Saber Sumar 😃");
         elementoSonidoVictoria.play();
         elementoSonidoVictoria.volume=0.2;
-    }else{
-        alert("Repasar sumas de primara mucha calcu IA 😢");
-        elementoSonidoPerdida.play();
+        alert("Saber Sumar 😃");}
+    else { elementoSonidoPerdida.play();
         elementoSonidoPerdida.volume=0.3;
-    }
+        alert("Repasar sumas de primaria mucha calcu IA 😢");}
 }
 $(document).on("keypress",function(event){
-    if(event.which==13){
+    if(event.which==13 && confirinijuego==1){
         evaluar();
     }
+});
+
+
+// boton reiniciar
+$("#reiniciar").on("click",function(){
+    location="index.html";
 });
