@@ -42,7 +42,6 @@ button.iniciar{
     flex-direction: column; 
 }
 
-
 #juego{
     display:none;
 }
@@ -81,6 +80,4 @@ button.iniciar{
     padding:3em;
     text-align:center;
     width:var(--ancho-pagina);
-
-
 }
