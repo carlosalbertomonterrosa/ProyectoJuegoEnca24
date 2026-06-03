@@ -26,6 +26,19 @@ button.iniciar{
     top:25%;
     width:40%;
 }
+.casillasdificultad{
+    height: 4em;
+    width: 5em;
+    cursor: pointer;
+    border-radius: 1em;
+    border: 2px solid rgba(0,0,0,0.8);
+}
+
+.dificultad{
+    display: flex;
+    flex-direction: column; 
+}
+
 #juego{
     display:none;
 }
@@ -209,3 +222,7 @@ button.iniciar{
 }
 
 /* FIN CAMBIOS HECHOS POR CARLOS */
+
+/* #modal-resultado,#modal-salida,button.iniciar{
+    display: none;
+} */

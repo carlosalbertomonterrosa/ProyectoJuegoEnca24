@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="css/estilos.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego </title>
+    <title> Juego </title>
 </head>
 <body>
     <div class="gameover"></div>
@@ -12,6 +12,41 @@
         <button id="reiniciar">reiniciar</button>
     </div>
     
+    <!-- ============================================================================================================================= -->
+    <!-- CAMBIOS HECHOS POR CARLOS: Modal de bienvenida -->
+        <!-- <div id="modal-bienvenida" class="modal-overlay">
+        <div class="modal-caja">
+            <div class="modal-emoji">🎮</div>
+            <h2 id="modal-texto">¡Bienvenido!</h2>
+            <p class="modal-sub">Prepárate para el desafío</p>
+            <button id="modal-cerrar">¡Vamos a jugar!</button>
+        </div>
+    </div> -->
+
+    <!-- CAMBIOS HECHOS POR CARLOS: Modal resultado final con niveles -->
+    <!-- <div id="modal-resultado" class="modal-overlay">
+        <div class="modal-caja modal-resultado-caja">
+            <div class="resultado-emoji" id="resultado-emoji">🏆</div>
+            <h2 id="resultado-titulo">¡Juego terminado!</h2>
+            <p id="resultado-nivel" class="resultado-nivel"></p>
+            <p id="resultado-puntaje" class="resultado-puntaje"></p>
+            <div class="resultado-botones">
+                <button id="btn-volver-jugar">🔄 Volver a jugar</button>
+                <button id="btn-salir" class="btn-salir">🚪 Salir</button>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- CAMBIOS HECHOS POR CARLOS: Modal mensaje de salida "tigre cepeda" -->
+    <!-- <div id="modal-salida" class="modal-overlay">
+        <div class="modal-caja">
+            <div class="modal-emoji">🐯</div>
+            <h2 class="tigre-texto">¡Te mordió el Tigre Cepeda!</h2>
+            <p class="modal-sub">Hasta la próxima, cobarde 😂</p>
+            <button id="btn-cerrar-salida">Cerrar</button>
+        </div>
+    </div>  -->
+<!-- "=============================================================================================================================== "-->
 
 
     <audio id="audiogeneral" loop>
@@ -38,7 +73,17 @@
             Nombre
             <input type="text" id="nombre">
             <br>
+             <!-- botones de dificultad --> 
+            <div class="dificultad">Dificultad
+                <div>
+                <button id="facil" class="casillasdificultad">Facil</button>
+                <button id="medio" class="casillasdificultad">Medio</button>
+                <button id="dificil" class="casillasdificultad">Dificil</button>
+                </div>   
+            </div>
             <button id="empezar">Empezar Juego</button>
+
+
         </article>
         <div id="tiempo"></div>
         <div id="juego">
