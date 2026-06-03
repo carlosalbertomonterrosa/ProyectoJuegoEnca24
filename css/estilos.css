@@ -81,3 +81,7 @@ button.iniciar{
     text-align:center;
     width:var(--ancho-pagina);
 }
+
+/* #modal-resultado,#modal-salida,button.iniciar{
+    display: none;
+} */
