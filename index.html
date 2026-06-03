@@ -11,8 +11,43 @@
     <div class="mensajeover">
         <button id="reiniciar">reiniciar</button>
     </div>
-    
 
+    <!-- CAMBIOS HECHOS POR CARLOS: Modal de bienvenida -->
+    <div id="modal-bienvenida" class="modal-overlay">
+        <div class="modal-caja">
+            <div class="modal-emoji">🎮</div>
+            <h2 id="modal-texto">¡Bienvenido!</h2>
+            <p class="modal-sub">Prepárate para el desafío</p>
+            <button id="modal-cerrar">¡Vamos a jugar!</button>
+        </div>
+    </div>
+    <!-- FIN CAMBIOS HECHOS POR CARLOS: Modal de bienvenida -->
+
+    <!-- CAMBIOS HECHOS POR CARLOS: Modal resultado final con niveles -->
+    <div id="modal-resultado" class="modal-overlay">
+        <div class="modal-caja modal-resultado-caja">
+            <div class="resultado-emoji" id="resultado-emoji">🏆</div>
+            <h2 id="resultado-titulo">¡Juego terminado!</h2>
+            <p id="resultado-nivel" class="resultado-nivel"></p>
+            <p id="resultado-puntaje" class="resultado-puntaje"></p>
+            <div class="resultado-botones">
+                <button id="btn-volver-jugar">🔄 Volver a jugar</button>
+                <button id="btn-salir" class="btn-salir">🚪 Salir</button>
+            </div>
+        </div>
+    </div>
+    <!-- FIN CAMBIOS HECHOS POR CARLOS: Modal resultado final -->
+
+    <!-- CAMBIOS HECHOS POR CARLOS: Modal mensaje de salida "tigre cepeda" -->
+    <div id="modal-salida" class="modal-overlay">
+        <div class="modal-caja">
+            <div class="modal-emoji">🐯</div>
+            <h2 class="tigre-texto">¡Te mordió el Tigre Cepeda!</h2>
+            <p class="modal-sub">Hasta la próxima, cobarde 😂</p>
+            <button id="btn-cerrar-salida">Cerrar</button>
+        </div>
+    </div>
+    <!-- FIN CAMBIOS HECHOS POR CARLOS: Modal mensaje de salida -->
 
     <audio id="audiogeneral" loop>
         <source src="sonidos/general.mp3" type="audio/mpeg">
@@ -38,7 +73,17 @@
             Nombre
             <input type="text" id="nombre">
             <br>
+             <!-- botones de dificultad --> 
+            <div class="dificultad">Dificultad
+                <div>
+                <button id="facil" class="casillasdificultad">Facil</button>
+                <button id="medio" class="casillasdificultad">Medio</button>
+                <button id="dificil" class="casillasdificultad">Dificil</button>
+                </div>   
+            </div>
             <button id="empezar">Empezar Juego</button>
+
+
         </article>
         <div id="tiempo"></div>
         <div id="juego">
@@ -55,5 +100,73 @@
 
     <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
     <script src="js/funciones.js"></script>
+
+    <!-- CAMBIOS HECHOS POR CARLOS: Script de modales y lógica de niveles -->
+    <script>
+        // === CAMBIOS HECHOS POR CARLOS ===
+        // Variables para contar respuestas correctas
+        window.respuestasCorrectas = 0;
+
+        // Función que muestra el modal de bienvenida con el nombre
+        window.mostrarBienvenida = function(nombre) {
+            $('#modal-texto').text('¡Bienvenido, ' + nombre + '!');
+            $('#modal-bienvenida').fadeIn(300);
+        };
+
+        // Cierra modal de bienvenida y arranca el juego
+        $('#modal-cerrar').on('click', function() {
+            $('#modal-bienvenida').fadeOut(200);
+            // El juego ya fue iniciado antes de abrir el modal
+        });
+
+        // Función que muestra el resultado final con nivel
+        window.mostrarResultadoFinal = function(correctas) {
+            let emoji, titulo, nivel;
+
+            if (correctas >= 5) {
+                emoji  = '🍄';
+                titulo = '¡Eres nivel Mario!';
+                nivel  = 'Maestro de las sumas. ¡Impresionante!';
+            } else if (correctas >= 3) {
+                emoji  = '🧠';
+                titulo = '¡Eres nivel Einstein!';
+                nivel  = 'Muy bien, casi genio.';
+            } else {
+                emoji  = '🤖';
+                titulo = '¡Eres nivel IA!';
+                nivel  = 'Tranquilo, la máquina también falla a veces.';
+            }
+
+            $('#resultado-emoji').text(emoji);
+            $('#resultado-titulo').text(titulo);
+            $('#resultado-nivel').text(nivel);
+            $('#resultado-puntaje').text('Respuestas correctas: ' + correctas + ' / 5');
+            $('#modal-resultado').fadeIn(300);
+        };
+
+        // Botón volver a jugar del modal de resultado
+        $('#btn-volver-jugar').on('click', function() {
+            $('#modal-resultado').fadeOut(200);
+            window.respuestasCorrectas = 0;
+            // Muestra el botón iniciar como al principio
+            $('.iniciar').fadeIn(200);
+        });
+
+        // Botón salir: cierra resultado y muestra mensaje del tigre
+        $('#btn-salir').on('click', function() {
+            $('#modal-resultado').fadeOut(200);
+            setTimeout(function() {
+                $('#modal-salida').fadeIn(300);
+            }, 250);
+        });
+
+        // Cierra el mensaje del tigre
+        $('#btn-cerrar-salida').on('click', function() {
+            $('#modal-salida').fadeOut(200);
+        });
+        // === FIN CAMBIOS HECHOS POR CARLOS ===
+    </script>
+    <!-- FIN CAMBIOS HECHOS POR CARLOS: Script de modales -->
+
 </body>
 </html>
